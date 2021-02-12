@@ -14,26 +14,26 @@ def roman_integer(string):
         character = string[i]
         x = romandict.get(character)
         numlist.append(x)
-
     # must find out if it is ascending, descending, or equal
-    if (numlist[len(numlist)-1] > numlist[0]):
+    if (numlist[0] < numlist[len(numlist)-1]):
         #ascending
         reversedList = numlist[::-1]
         for i in range(1, len(numlist)):
-            numlist[0] = numlist[0] - numlist[i]
-    if (numlist[len(numlist)-1] < numlist[0]):
+            reversedList[0] = reversedList[0] - reversedList[i]
+        return reversedList[0]
+    if (numlist[0] > numlist[len(numlist)-1]):
         #descending
-
+        for i in range(1, len(numlist)):
+            numlist[0] = numlist[0] + numlist[i]
+        return numlist[0]
     if(numlist[len(numlist)-1] == numlist[0]):
         #just sum up the list (equal)
-
-    retval = numlist[0]
-    return retval
-
-
+        for i in range(1, len(numlist)):
+            numlist[0] = numlist[0] + numlist[i]
+        return numlist[0]
 
 def main():
-    romanString = 'IIV'
+    romanString = 'LL'
     retval = roman_integer(romanString)
     print(retval)
 main()
